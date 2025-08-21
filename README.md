@@ -9,6 +9,7 @@ conda activate GCF2mlst
 ```
 ## 运行示例/Run
 ```bash
+cd GCF2mlst
 ./GCF2mlst-SingleStrain   ecoli  result  GCF_002233455.1 
 ./GCF2mlst-MutipleStrain  ecoli  result  /DFlab/Accession.list
 (script  MLST_Species  output_file  Accession)
