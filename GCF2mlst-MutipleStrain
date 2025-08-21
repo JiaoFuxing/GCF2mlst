@@ -1,0 +1,23 @@
+#!/bin/bash
+if [ "$#" -ne 3 ]; then  
+    echo "Usage: $0 <Species><output><Accession.list>"  
+    exit 1  
+fi  
+Species=$1
+Output=$2
+AccessionList=$3
+datasets download genome accession --inputfile $AccessionList --dehydrated
+unzip -o ncbi_dataset.zip
+datasets rehydrate --directory .
+
+num=$(cat $AccessionList |wc -l)
+rm $Output #reset
+for ((t=1; t<=$num; t++)); do
+   Accession=$(cat $AccessionList |sed -n ${t}p)
+   echo $Accession
+   mlst --scheme $Species ./ncbi_dataset/data/$Accession/*.fna >> $Output
+done
+cat $Output
+
+#By：Jacky14
+#2025/08/21 00:20

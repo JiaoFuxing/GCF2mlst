@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ "$#" -ne 3 ]; then  
+    echo "Usage: $0 <Species><output><GCF_002485785.1>"  
+    exit 1  
+fi  
+Species=$1
+Output=$2
+Accession=$3
+datasets  download genome accession $Accession --include genome --filename $Accession
+unzip -o $Accession #-o默认覆盖之前的文件
+mlst --scheme $Species ./ncbi_dataset/data/$Accession/*.fna > $Output
+cat $Output
+
+
+#rm -rf $Accession ./ncbi_dataset
+
+#By：Jacky14
+#2025/08/21 00:20
